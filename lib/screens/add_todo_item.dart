@@ -3,8 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../models/ModelProvider.dart';
 import '../providers/amplify.dart';
 
-class AddTodo extends ConsumerWidget {
-  AddTodo({Key? key}) : super(key: key);
+class AddTodoItem extends ConsumerWidget {
+  AddTodoItem({Key? key}) : super(key: key);
 
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
