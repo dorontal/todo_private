@@ -16,7 +16,7 @@ MY_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 cd $MY_DIR/..
 
-TAG="v`cat VERSION | perl -pe 's/^(.*)\.\d+$/$1/'`"
+TAG="v`cat VERSION`"
 
 git tag -a "$TAG" -m "git tag w/version: $TAG"
 
