@@ -32,7 +32,6 @@ dependencies:
   amplify_authenticator: ^0.1.0
   amplify_datastore: ^0.4.1
   amplify_flutter: ^0.4.1
-  amplify_storage_s3: ^0.4.1
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter

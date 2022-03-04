@@ -19,16 +19,15 @@ class App extends ConsumerWidget {
     amplifyService
         .configureAmplify()
         .then((_) => amplifyService.initUserStream());
-    return MaterialApp(
-        title: 'Todo List',
-        theme: appTheme,
-        home: Authenticator(
-          child: MaterialApp(
-              theme: ThemeData.light(),
-              darkTheme: ThemeData.dark(),
-              builder: Authenticator.builder(),
-              home: const Todos()),
-        ));
+    return Authenticator(
+      child: MaterialApp(
+          // theme: ThemeData.light(),
+          // darkTheme: ThemeData.dark(),
+          title: 'Todo List',
+          theme: appTheme,
+          builder: Authenticator.builder(),
+          home: const Todos()),
+    );
   }
 }
 /*
