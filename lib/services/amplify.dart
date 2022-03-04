@@ -36,18 +36,6 @@ class AmplifyService {
   }
 
   Future<AuthUser?> getCognitoUser() async {
-    //   // This version barfs if you delete the user and restart app
-    //   final result = await Amplify.Auth.fetchAuthSession();
-    //   if (result.isSignedIn == true) {
-    //     final AuthUser cognitoUser = await Amplify.Auth.getCurrentUser();
-    //     developer.log('*********** getCurrentUser() got one!');
-    //     developer.inspect(cognitoUser);
-    //     return cognitoUser;
-    //   } else {
-    //     developer.log('*********** getCurrentUser() - signed out');
-    //     return null;
-    //   }
-    // }
     try {
       final AuthUser cognitoUser = await Amplify.Auth.getCurrentUser();
       developer.log('*********** getCurrentUser() got one!');
@@ -58,5 +46,17 @@ class AmplifyService {
       developer.log('*********** getCurrentUser() - signed out - e: $e');
       return null;
     }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  /// Amplify Datastore
+  //////////////////////////////////////////////////////////////////////////////
+
+  Future<void> dataStoreSave(Model model) async {
+    await Amplify.DataStore.save(model);
+  }
+
+  Future<void> dataStoreDelete(Model model) async {
+    await Amplify.DataStore.delete(model);
   }
 }

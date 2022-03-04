@@ -5,3 +5,5 @@ import 'package:flutter/material.dart';
 final appTheme = ThemeData.dark();
 
 const todoItemIconSize = 24.0;
+
+const todoListPadding = 8.0;
