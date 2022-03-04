@@ -24,7 +24,7 @@ class App extends ConsumerWidget {
           title: 'Todo List',
           theme: appTheme,
           builder: Authenticator.builder(),
-          home: const Todos()),
+          home: Todos()),
     );
   }
 }

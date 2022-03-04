@@ -13,7 +13,6 @@ class AmplifyService {
 
   final StreamController<AuthUser?> userStreamController =
       StreamController<AuthUser?>();
-  late StreamSubscription<QuerySnapshot<Todo>> _subscription;
 
   // returns whether or not Amplify is configured
   Future<void> startUserStream() async {
