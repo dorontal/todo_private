@@ -1,22 +1,20 @@
-import 'dart:developer' as developer;
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/material.dart';
-import '../models/ModelProvider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:todo_private/providers/amplify.dart';
+import '../widgets/todo_list.dart';
 
-class Todos extends HookWidget {
-  Todos({Key? key}) : super(key: key);
-
-  final _isLoadingNotifier = useState(false);
-  final _todosNotifier = useState<List<Todo>>([]);
+class Todos extends ConsumerWidget {
+  const Todos({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    // final amplifyService = ref.watch(amplifyServiceProvider);
-    return Center(
-        child: ElevatedButton(
-            onPressed: () async {
-              developer.log('clicked i');
-            },
-            child: const Text('push me')));
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ref.watch(todosSnapshotProvider).when(
+        data: (snapshot) => TodoList(todos: snapshot.items),
+        loading: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+        error: (_, __) => const Center(
+              child: Text('Something went wrong: cannot load data'),
+            ));
   }
 }
