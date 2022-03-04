@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:amplify_api/amplify_api.dart';
+import 'package:amplify_authenticator/amplify_authenticator.dart';
 // amplify configuration and models that should have been generated for you
 import 'amplifyconfiguration.dart';
 import 'models/ModelProvider.dart';
@@ -101,6 +102,16 @@ class _TodosPageState extends State<TodosPage> {
 
   @override
   Widget build(BuildContext context) {
+    return Authenticator(
+      child: MaterialApp(
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          builder: Authenticator.builder(),
+          home: buildTodosPage(context)),
+    );
+  }
+
+  Widget buildTodosPage(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Todo List'),
@@ -171,6 +182,10 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return buildTodoItem(context);
+  }
+
+  Widget buildTodoItem(BuildContext context) {
     return Card(
       child: InkWell(
         onTap: () {
@@ -239,6 +254,10 @@ class _AddTodoFormState extends State<AddTodoForm> {
 
   @override
   Widget build(BuildContext context) {
+    return buildAddTodoPage(context);
+  }
+
+  Widget buildAddTodoPage(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Todo'),
