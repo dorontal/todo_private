@@ -36,6 +36,7 @@ class AmplifyService {
 
   Future<AuthUser?> getCognitoUser() async {
     try {
+      final x = Amplify.DataStore.observeQuery(Todo.classType);
       final AuthUser cognitoUser = await Amplify.Auth.getCurrentUser();
       developer.log('*********** getCurrentUser() got one!');
       developer.inspect(cognitoUser);
