@@ -1,3 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:amplify_authenticator/amplify_authenticator.dart';
+import 'constants/style.dart';
+import 'providers/amplify.dart';
+import 'widgets/todos.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const ProviderScope(child: App()));
+}
+
+class App extends ConsumerWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final amplifyService = ref.watch(amplifyServiceProvider);
+    amplifyService
+        .configureAmplify()
+        .then((_) => amplifyService.initUserStream());
+    return MaterialApp(
+        title: 'Todo List',
+        theme: appTheme,
+        home: Authenticator(
+          child: MaterialApp(
+              theme: ThemeData.light(),
+              darkTheme: ThemeData.dark(),
+              builder: Authenticator.builder(),
+              home: const Todos()),
+        ));
+  }
+}
+/*
 import 'dart:developer' as developer;
 // dart async library we will refer to when setting up real time updates
 import 'dart:async';
@@ -284,3 +318,4 @@ class _AddTodoFormState extends State<AddTodoForm> {
     );
   }
 }
+*/

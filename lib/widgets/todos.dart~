@@ -1,0 +1,25 @@
+import 'dart:developer' as developer;
+// import 'package:amplify_api/model_mutations.dart';
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../providers/amplify.dart';
+// import '../models/project.dart';
+
+class Todos extends ConsumerWidget {
+  const Todos({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final amplifyService = ref.watch(amplifyServiceProvider);
+    return Center(
+        child: ElevatedButton(
+            onPressed: () async {
+              developer.log('clicked i');
+              final user = await amplifyService
+                  .getUserTodos('b8b99617-2cca-4822-bb86-60e867d93d21');
+              developer.log('got user');
+              developer.inspect(user);
+            },
+            child: const Text('push me')));
+  }
+}

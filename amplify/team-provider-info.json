@@ -10,6 +10,11 @@
       "StackName": "amplify-todoprivate-dev-183722",
       "StackId": "arn:aws:cloudformation:us-east-1:957560195052:stack/amplify-todoprivate-dev-183722/e10996f0-9b4a-11ec-99bb-1262360c55cf",
       "AmplifyAppId": "d1rlcywixa3fw2"
+    },
+    "categories": {
+      "auth": {
+        "todoprivate3b63c8ca": {}
+      }
     }
   }
 }
