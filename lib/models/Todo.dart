@@ -30,6 +30,7 @@ class Todo extends Model {
   final String id;
   final String? _name;
   final String? _description;
+  final bool? _done;
   final TemporalDateTime? _createdAt;
   final TemporalDateTime? _updatedAt;
 
@@ -58,6 +59,10 @@ class Todo extends Model {
     return _description;
   }
   
+  bool? get done {
+    return _done;
+  }
+  
   TemporalDateTime? get createdAt {
     return _createdAt;
   }
@@ -66,13 +71,14 @@ class Todo extends Model {
     return _updatedAt;
   }
   
-  const Todo._internal({required this.id, required name, description, createdAt, updatedAt}): _name = name, _description = description, _createdAt = createdAt, _updatedAt = updatedAt;
+  const Todo._internal({required this.id, required name, description, done, createdAt, updatedAt}): _name = name, _description = description, _done = done, _createdAt = createdAt, _updatedAt = updatedAt;
   
-  factory Todo({String? id, required String name, String? description}) {
+  factory Todo({String? id, required String name, String? description, bool? done}) {
     return Todo._internal(
       id: id == null ? UUID.getUUID() : id,
       name: name,
-      description: description);
+      description: description,
+      done: done);
   }
   
   bool equals(Object other) {
@@ -85,7 +91,8 @@ class Todo extends Model {
     return other is Todo &&
       id == other.id &&
       _name == other._name &&
-      _description == other._description;
+      _description == other._description &&
+      _done == other._done;
   }
   
   @override
@@ -99,6 +106,7 @@ class Todo extends Model {
     buffer.write("id=" + "$id" + ", ");
     buffer.write("name=" + "$_name" + ", ");
     buffer.write("description=" + "$_description" + ", ");
+    buffer.write("done=" + (_done != null ? _done!.toString() : "null") + ", ");
     buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
     buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
@@ -106,27 +114,30 @@ class Todo extends Model {
     return buffer.toString();
   }
   
-  Todo copyWith({String? id, String? name, String? description}) {
+  Todo copyWith({String? id, String? name, String? description, bool? done}) {
     return Todo._internal(
       id: id ?? this.id,
       name: name ?? this.name,
-      description: description ?? this.description);
+      description: description ?? this.description,
+      done: done ?? this.done);
   }
   
   Todo.fromJson(Map<String, dynamic> json)  
     : id = json['id'],
       _name = json['name'],
       _description = json['description'],
+      _done = json['done'],
       _createdAt = json['createdAt'] != null ? TemporalDateTime.fromString(json['createdAt']) : null,
       _updatedAt = json['updatedAt'] != null ? TemporalDateTime.fromString(json['updatedAt']) : null;
   
   Map<String, dynamic> toJson() => {
-    'id': id, 'name': _name, 'description': _description, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
+    'id': id, 'name': _name, 'description': _description, 'done': _done, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
 
   static final QueryField ID = QueryField(fieldName: "todo.id");
   static final QueryField NAME = QueryField(fieldName: "name");
   static final QueryField DESCRIPTION = QueryField(fieldName: "description");
+  static final QueryField DONE = QueryField(fieldName: "done");
   static var schema = Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Todo";
     modelSchemaDefinition.pluralName = "Todos";
@@ -157,6 +168,12 @@ class Todo extends Model {
       key: Todo.DESCRIPTION,
       isRequired: false,
       ofType: ModelFieldType(ModelFieldTypeEnum.string)
+    ));
+    
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+      key: Todo.DONE,
+      isRequired: false,
+      ofType: ModelFieldType(ModelFieldTypeEnum.bool)
     ));
     
     modelSchemaDefinition.addField(ModelFieldDefinition.nonQueryField(
