@@ -16,8 +16,8 @@ class AmplifyService {
   late StreamSubscription<QuerySnapshot<Todo>> _subscription;
 
   // returns whether or not Amplify is configured
-  Future<void> initUserStream() async {
-    developer.log('initUserStream()');
+  Future<void> startUserStream() async {
+    developer.log('startUserStream()');
     AuthUser? cognitoUser = await getCognitoUser();
     userStreamController.add(cognitoUser);
   }

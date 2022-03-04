@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/ModelProvider.dart';
+import '../constants/style.dart';
 import './todo_item.dart';
 
 class TodoList extends StatelessWidget {
@@ -11,7 +12,7 @@ class TodoList extends StatelessWidget {
   Widget build(BuildContext context) {
     return todos.isNotEmpty
         ? ListView(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(todoListPadding),
             children: todos.map((todo) => TodoItem(todo: todo)).toList())
         : const Center(child: Text('Tap button below to add a todo!'));
   }
