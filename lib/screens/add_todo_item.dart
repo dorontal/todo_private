@@ -36,8 +36,7 @@ class AddTodoItem extends ConsumerWidget {
                     String description = _descriptionController.text;
                     Todo newTodo = Todo(
                         name: name,
-                        description:
-                            description.isNotEmpty ? description : null,
+                        description: description.isEmpty ? null : description,
                         done: false);
                     amplifyService.dataStoreSave(newTodo);
                     Navigator.of(context).pop();
