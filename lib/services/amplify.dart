@@ -14,7 +14,6 @@ class AmplifyService {
   final StreamController<AuthUser?> userStreamController =
       StreamController<AuthUser?>();
 
-  // returns whether or not Amplify is configured
   Future<void> startUserStream() async {
     developer.log('startUserStream()');
     AuthUser? cognitoUser = await getCognitoUser();

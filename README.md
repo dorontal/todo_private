@@ -1,6 +1,6 @@
 # todo_private
 
-A new Flutter project.
+Elaborating on repository 'todo'
 
 ## Getting Started
 
