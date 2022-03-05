@@ -40,7 +40,6 @@ class AmplifyService {
       developer.log('*********** getCurrentUser() got one!');
       developer.inspect(cognitoUser);
       return cognitoUser;
-      // } on SignedOutException catch (e) {
     } on AuthException catch (e) {
       developer.log('*********** getCurrentUser() - signed out - e: $e');
       return null;
